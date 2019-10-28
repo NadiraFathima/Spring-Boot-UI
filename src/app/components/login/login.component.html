@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Login to test project</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <input matInput placeholder="Username" [(ngModel)]="userName" name="userName" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="authenticate()" color="primary">Login</button>
+    </mat-card-actions>
+</mat-card>
