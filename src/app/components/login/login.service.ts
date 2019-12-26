@@ -11,21 +11,15 @@ export class LoginService {
 
   authenticate(username, password) {
     const authentication$ = new Subject();
-    const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(username + ':' + password)});
+    const authHeader = 'Basic ' + btoa(username + ':' + password);
+    const headers = new HttpHeaders({Authorization: authHeader});
     const req = this.httpClient.get('http://localhost:8080/login', {headers});
-    req.subscribe(userData => {
-      sessionStorage.setItem('userName', username);
-      authentication$.next(userData);
+    req.subscribe(isValid => {
+      if(isValid) {
+        sessionStorage.setItem('token', authHeader);
+      }
+      authentication$.next(isValid);
     });
     return authentication$;
-    
-    // pipe(
-    //   map(
-    //     userData => {
-    //       sessionStorage.setItem('username', username);
-    //       return userData;
-    //     }
-    //   )
-    // );
   }
 }
